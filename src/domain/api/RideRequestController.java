@@ -1,6 +1,7 @@
 package domain.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import domain.data.User;
-import domain.repository.UserRepository;
-import domain.services.UserService;
+import domain.data.Ride;
+import domain.repository.RideRepository;
+import domain.services.RideService;
 
 @RestController
-public class RequestController {
-	
+@RequestMapping("/ride")
+public class RideRequestController {
 	@Autowired
-    UserService userService;
+    RideService rideService;
 
     @Autowired
-    UserRepository userRepository;
+    RideRepository rideRepository;
 	
 	// ----- TEST -----
 	@RequestMapping("/greeting")
@@ -29,31 +30,35 @@ public class RequestController {
         return String.format("Hello %s!", name);
     }
     
-	// ----- Signup User -----------------------------
+	// ----- Create Ride -----------------------------
     @PostMapping
-    public void signup(@RequestBody User user) {
-        System.out.println("Signup | user: " + user);
-        userService.signup(user);
+    public void signup(@RequestBody Ride ride) {
+        System.out.println("Create | ride: " + ride);
+        rideService.create(ride);
     }
 	
 	// ----- List Users -------------------------------
 	@GetMapping("{id}")
-    public User find(@PathVariable("id") Long userId) {
-        return userRepository.findOne(userId);
+    public Ride find(@PathVariable("id") Long rideId) {
+        return rideRepository.findOne(rideId);
     }
 
     @GetMapping
-    public Iterable<User> findAll() {
-        return userRepository.findAll();
+    public Iterable<Ride> findAll() {
+        return rideRepository.findAll();
     }
     
     // ----- UPDATE -----------------------------
-  @PutMapping
-    public void update(@RequestBody User user) {
-        System.out.println("Updating | user: " + user);
-        userService.update(user);
+  @PutMapping("{id}")
+    public void update(@PathVariable("id") Long oldRideId, @RequestBody Ride newRide) {
+        System.out.println("Updating | ride: " + newRide);
+        rideService.update(oldRideId, newRide);
     }
     
     // ----- DELETE -----------------------------
-
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") Long rideId) {
+        System.out.println("Delete | ride N°: " + rideId);
+        rideService.delete(rideId);
+    }
 }

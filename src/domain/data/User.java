@@ -1,11 +1,14 @@
 package domain.data;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,6 +28,10 @@ public class User {
 	private String 	password;
 	@Temporal(TemporalType.DATE)
 	private Date 	birthDate;
+	@OneToMany(mappedBy = "driver")
+	private List<Ride> offeredRides;
+	@ManyToMany(mappedBy = "passengers")
+	private List<Ride> bookedRides;
 	
 	private String 	firstName;
 	private String 	lastName;
@@ -32,6 +39,9 @@ public class User {
 	
 	private int 	rating;
 	private boolean confirmed;
+	
+//	private Vehicule vehicule;
+
 	
 	// ----- Getters and Setters ----------------
 	
@@ -98,5 +108,36 @@ public class User {
 		this.confirmed = confirmed;
 	}
 	
-
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public List<Ride> getOfferedRides() {
+		return offeredRides;
+	}
+	
+	public void setOfferedRides(List<Ride> offeredRides) {
+		this.offeredRides = offeredRides;
+	}
+	
+	public List<Ride> getBookedRides() {
+		return bookedRides;
+	}
+	
+	public void setBookedRides(List<Ride> bookedRides) {
+		this.bookedRides = bookedRides;
+	}
+	
+//	public Vehicule getVehicule() {
+//		return vehicule;
+//	}
+//	
+//	public void setVehicule(Vehicule vehicule) {
+//		this.vehicule = vehicule;
+//	}
+	
 }
