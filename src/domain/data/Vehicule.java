@@ -1,4 +1,4 @@
-package data;
+package domain.data;
 
 public class Vehicule {
 	

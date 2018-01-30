@@ -1,17 +1,35 @@
-package data;
+package domain.data;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+@Entity
 public class User {
 	
 	// ----- Parameters -------------------------
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long 	id;
+	@NotBlank
 	private String 	login;
+	@NotBlank
 	private String 	password;
+	@Temporal(TemporalType.DATE)
+	private Date 	birthDate;
+	
 	private String 	firstName;
 	private String 	lastName;
 	private String 	email;
-	private Date 	birthDate;
+	
 	private int 	rating;
 	private boolean confirmed;
 	
