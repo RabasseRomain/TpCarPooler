@@ -1,4 +1,4 @@
-package domain.data;
+package main.domain.data;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +14,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
@@ -28,8 +30,10 @@ public class User {
 	private String 	password;
 	@Temporal(TemporalType.DATE)
 	private Date 	birthDate;
+	@JsonIgnore
 	@OneToMany(mappedBy = "driver")
 	private List<Ride> offeredRides;
+	@JsonIgnore
 	@ManyToMany(mappedBy = "passengers")
 	private List<Ride> bookedRides;
 	
@@ -40,7 +44,7 @@ public class User {
 	private int 	rating;
 	private boolean confirmed;
 	
-//	private Vehicule vehicule;
+//	private List<Vehicule> vehicules;
 
 	
 	// ----- Getters and Setters ----------------
@@ -131,13 +135,11 @@ public class User {
 	public void setBookedRides(List<Ride> bookedRides) {
 		this.bookedRides = bookedRides;
 	}
-	
-//	public Vehicule getVehicule() {
-//		return vehicule;
+//	public List<Vehicule> getVehicules() {
+//		return vehicules;
 //	}
-//	
-//	public void setVehicule(Vehicule vehicule) {
-//		this.vehicule = vehicule;
+//	public void setVehicules(List<Vehicule> vehicules) {
+//		this.vehicules = vehicules;
 //	}
 	
 }

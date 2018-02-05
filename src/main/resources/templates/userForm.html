@@ -1,0 +1,47 @@
+<!--DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"-->
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Signing Up</title>
+	</head>
+	<body>
+        <form action="#" th:action="@{/}" th:object="${userCreation}" method="post">
+            <table>
+                <tr>
+                    <td>Login:</td>
+                    <td><input type="text" th:field="*{login}" /></td>
+                    <td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="text" th:field="*{password}" /></td>
+                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" th:field="*{email}" /></td>
+                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+                </tr>
+                <tr>
+                    <td>Birth date:</td>
+                    <td><input type="text" th:field="*{birthDate}" /></td>
+                    <td th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Birthdate Error</td>
+                </tr>
+               <tr>
+                    <td>First Name:</td>
+                    <td><input type="text" th:field="*{firstName}" /></td>
+                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input type="text" th:field="*{lastName}" /></td>
+                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,10 +1,10 @@
-package domain.services;
+package main.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import domain.data.User;
-import domain.repository.UserRepository;
+import main.domain.data.User;
+import main.domain.repository.UserRepository;
 
 @Service
 public class UserService {

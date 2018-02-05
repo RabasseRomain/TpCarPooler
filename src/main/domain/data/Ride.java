@@ -1,6 +1,6 @@
-package domain.data;
+package main.domain.data;
 
-//import java.util.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ride {
@@ -20,20 +22,21 @@ public class Ride {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
     private User driver;
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany
 	private List<User> passengers;
 	
     private int maxSeats;
     
-//    private List<String> locations;
+    @Temporal(TemporalType.DATE)
+    private Date departure;
 //    private List<Date> timeStamps;
-//    private List<String> caracteristics;
-
     
+//    private List<String> locations;
+ 
 	// ----- Getters and Setters ----------------
 	
 	public long getId() {
@@ -83,13 +86,13 @@ public class Ride {
 //	public void setTimeStamps(List<Date> timeStamps) {
 //		this.timeStamps = timeStamps;
 //	}
-//	
-//	public List<String> getCaracteristics() {
-//		return caracteristics;
-//	}
-//	
-//	public void setCaracteristics(List<String> caracteristics) {
-//		this.caracteristics = caracteristics;
-//	}
+
+	public Date getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(Date departure) {
+		this.departure = departure;
+	}
 
 }

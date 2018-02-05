@@ -1,4 +1,4 @@
-package domain.data;
+package main.domain.data;
 
 public class Vehicule {
 	

@@ -1,4 +1,4 @@
-package domain.api;
+package main.domain.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import domain.data.Ride;
-import domain.data.User;
-import domain.repository.RideRepository;
-import domain.repository.UserRepository;
-import domain.services.UserService;
+import main.domain.data.Ride;
+import main.domain.data.User;
+import main.domain.repository.RideRepository;
+import main.domain.repository.UserRepository;
+import main.domain.services.UserService;
 
 @RestController
 @RequestMapping("/user")
@@ -68,16 +68,49 @@ public class UserRequestController {
         userService.delete(userId);
     }
     
-    // ----- UPDATE -----------------------------
-	@PutMapping("{rideId}/{userId}")
-    public void addRideToUser(@PathVariable("rideId") Long rideId, @PathVariable("userId") Long userId) {
+    // ----- OFFER A RIDE -----------------------
+	@PutMapping("offer/{rideId}/{userId}")
+    public void offerRide(@PathVariable("rideId") Long rideId, @PathVariable("userId") Long userId) {
         User user = userRepository.findOne(userId);
 		Ride ride = rideRepository.findOne(rideId);
 		
 		user.getOfferedRides().add(ride);
 		ride.setDriver(user);
-		
+	
 		userRepository.save(user);
 		rideRepository.save(ride);
     }
+	
+	// ----- GET ON A RIDE ----------------------
+	@PutMapping("book/{rideId}/{userId}")
+    public void bookRideAsPassenger(@PathVariable("rideId") Long rideId, @PathVariable("userId") Long userId) {
+        User user = userRepository.findOne(userId);
+		Ride ride = rideRepository.findOne(rideId);
+		
+		if(ride.getPassengers().size() < ride.getMaxSeats()) {		
+			user.getBookedRides().add(ride);
+			ride.getPassengers().add(user);
+			userRepository.save(user);
+			rideRepository.save(ride);
+		} else {
+			System.out.println("Full Ride !");
+		}
+    }
+	
+	// ----- GET OFF A RIDE ---------------------
+	@PutMapping("unbook/{rideId}/{userId}")
+    public void unbookUserFromRide(@PathVariable("rideId") Long rideId, @PathVariable("userId") Long userId) {
+        User user = userRepository.findOne(userId);
+		Ride ride = rideRepository.findOne(rideId);
+		
+		if(ride.getPassengers().contains(user)) {		
+			user.getBookedRides().remove(ride);
+			ride.getPassengers().remove(user);
+			userRepository.save(user);
+			rideRepository.save(ride);
+		} else {
+			System.out.println("Not on that Ride !");
+		}
+    }
+	
 }

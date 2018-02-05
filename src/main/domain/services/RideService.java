@@ -1,10 +1,10 @@
-package domain.services;
+package main.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import domain.data.Ride;
-import domain.repository.RideRepository;
+import main.domain.data.Ride;
+import main.domain.repository.RideRepository;
 
 
 @Service

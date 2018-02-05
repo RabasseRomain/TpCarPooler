@@ -1,4 +1,4 @@
-package domain.api;
+package main.domain.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import domain.data.Ride;
-import domain.repository.RideRepository;
-import domain.services.RideService;
+import main.domain.data.Ride;
+import main.domain.repository.RideRepository;
+import main.domain.services.RideService;
 
 @RestController
 @RequestMapping("/ride")
