@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,14 +30,18 @@ public class Ride {
 	//@JsonIgnore
 	@ManyToMany
 	private List<User> passengers;
-	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date departureTime;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date arrivalTime;  
+    
+    private String departurePlace;
+    
+    private String arrivalPlace;
+    
     private int maxSeats;
-    
-    @Temporal(TemporalType.DATE)
-    private Date departure;
-//    private List<Date> timeStamps;
-    
-//    private List<String> locations;
  
 	// ----- Getters and Setters ----------------
 	
@@ -71,28 +77,36 @@ public class Ride {
 		this.maxSeats = maxSeats;
 	}
 
-//	public List<String> getLocations() {
-//		return locations;
-//	}
-//	
-//	public void setLocations(List<String> locations) {
-//		this.locations = locations;
-//	}
-//	
-//	public List<Date> getTimeStamps() {
-//		return timeStamps;
-//	}
-//	
-//	public void setTimeStamps(List<Date> timeStamps) {
-//		this.timeStamps = timeStamps;
-//	}
-
-	public Date getDeparture() {
-		return departure;
+	public Date getDepartureTime() {
+		return departureTime;
 	}
 
-	public void setDeparture(Date departure) {
-		this.departure = departure;
+	public void setDepartureTime(Date departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public Date getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(Date arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public String getDeparturePlace() {
+		return departurePlace;
+	}
+
+	public void setDeparturePlace(String departurePlace) {
+		this.departurePlace = departurePlace;
+	}
+
+	public String getArrivalPlace() {
+		return arrivalPlace;
+	}
+
+	public void setArrivalPlace(String arrivalPlace) {
+		this.arrivalPlace = arrivalPlace;
 	}
 
 }

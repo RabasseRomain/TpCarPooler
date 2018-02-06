@@ -7,7 +7,8 @@ import main.domain.data.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-
+	
+	public User findOneByLogin(String login);
 
 }
  

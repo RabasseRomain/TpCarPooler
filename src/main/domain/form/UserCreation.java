@@ -2,6 +2,8 @@ package main.domain.form;
 
 import java.util.Date;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -14,21 +16,18 @@ public class UserCreation {
 	private String login;
 	@NotNull
 	@Size(min=3, max=30)
-	private String 	password;
+	private String password;
 	@NotNull
-	private String 	email;
+	private String email;
 	@NotNull
-	private Date 	birthDate;
-	
-	private String 	firstName;
-	
-	private String 	lastName;
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
 
 	// --------------------------------
 	
 	@Override
 	public String toString() {
-		return "UserCreated [login=" + login + ", password=" + password + ", email=" + email + ", birthDate=" + birthDate + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "UserCreated [login=" + login + ", password=" + password + ", email=" + email + ", birthDate=" + birthDate + "]";
 	}
 	
 	// -------------------------------
@@ -56,18 +55,6 @@ public class UserCreation {
 	}
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 }

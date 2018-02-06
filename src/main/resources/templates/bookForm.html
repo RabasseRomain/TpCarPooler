@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Book my Ride</title>
+	</head>
+	<body>
+        <form action="#" th:action="@{/RideBook}" th:object="${rideBooking}" method="post">
+            <table>
+            	<tr>
+                    <td>Login:</td>
+                    <td><input type="text" th:field="*{login}" /></td>
+                    <td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</td>
+                </tr>
+
+            	<tr>
+                    <td>Ride Id:</td>
+                    <td><input type="text" th:field="*{rideId}" /></td>
+                    <td th:if="${#fields.hasErrors('RideId')}" th:errors="*{RideId}">Login Error</td>
+                </tr>
+                
+                <tr>
+                    <td>Number of Seats:</td>
+                    <td><input type="text" th:field="*{seatsBooked}" /></td>
+                    <td th:if="${#fields.hasErrors('seatsBooked')}" th:errors="*{seatsBooked}">Login Error</td>
+                </tr>
+
+                <tr>
+                    <td>
+                    	<button type="submit">Submit</button>
+                    	<button type="reset">Reset</button>
+                    </td>
+                </tr>
+                
+            </table>
+        </form>
+    </body>
+</html>

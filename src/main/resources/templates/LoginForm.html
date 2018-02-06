@@ -3,10 +3,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Signing Up</title>
+		<title>Loging In</title>
 	</head>
 	<body>
-        <form action="#" th:action="@{/SignUp}" th:object="${userCreation}" method="post">
+        <form action="#" th:action="@{/Login}" th:object="${userLoginForm}" method="post">
             <table>
                 <tr>
                     <td>Login:</td>
@@ -17,16 +17,6 @@
                     <td>Password:</td>
                     <td><input type="text" th:field="*{password}" /></td>
                     <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="text" th:field="*{email}" /></td>
-                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
-                </tr>
-                <tr>
-                    <td>Birth date:</td>
-                    <td><input type="text" th:field="*{birthDate}" placeholder="yyyy/mm/dd" /></td>
-                    <td th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Birthday Error</td>
                 </tr>
                 <tr>
                     <td>
