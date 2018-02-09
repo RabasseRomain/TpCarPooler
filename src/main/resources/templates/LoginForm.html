@@ -6,7 +6,8 @@
 		<title>Loging In</title>
 	</head>
 	<body>
-        <form action="#" th:action="@{/Login}" th:object="${userLoginForm}" method="post">
+	
+        <form action="#" th:action="@{/UserLogin}" th:object="${userLogin}" method="post">
             <table>
                 <tr>
                     <td>Login:</td>
@@ -26,5 +27,6 @@
                 </tr>
             </table>
         </form>
+                
     </body>
 </html>

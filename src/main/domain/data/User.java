@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class User {
@@ -28,12 +28,13 @@ public class User {
 	private String 	login;
 	@NotBlank
 	private String 	password;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date 	birthDate;
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy = "driver")
 	private List<Ride> offeredRides;
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany(mappedBy = "passengers")
 	private List<Ride> bookedRides;
 	
@@ -43,9 +44,6 @@ public class User {
 	
 	private int 	rating;
 	private boolean confirmed;
-	
-//	private List<Vehicule> vehicules;
-
 	
 	// ----- Getters and Setters ----------------
 	

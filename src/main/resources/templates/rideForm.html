@@ -1,46 +1,45 @@
 <!DOCTYPE HTML>
 
 <html xmlns:th="http://www.thymeleaf.org">
+
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Altruism</title>
+		<title>Altruism</title>	
+        <script src="./js/sockjs-0.3.4.js"></script>
+        <script src="./js/stomp.js"></script>
 	</head>
+	
 	<body>
-        <form action="#" th:action="@{/RideOffer}" th:object="${rideCreation}" method="post" >
+        <form action="#" th:action="@{/RideCreate}" th:object="${rideCreation}" method="post" >
             <table>
             	<tr>
                     <td>Login:</td>
-                    <td><input type="text" th:field="*{login}" /></td>
+                    <td><input id="login" type="text" th:field="*{login}" /></td>
                     <td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</td>
                 </tr>
                 <tr>
-                    <td>Password:</td>
-                    <td><input type="text" th:field="*{password}" /></td>
-                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
-                </tr>
-                <tr>
                     <td>Departure Place:</td>
-                    <td><input type="text" th:field="*{departurePlace}" /></td>
+                    <td><input id="departurePlace" type="text" th:field="*{departurePlace}" /></td>
                     <td th:if="${#fields.hasErrors('departurePlace')}" th:errors="*{departurePlace}">Location Error</td>
                 </tr>
                 <tr>
                     <td>Departure Time:</td>
-                    <td><input type="text" th:field="*{departureTime}"  placeholder="yyyy/mm/dd HH:mm" /></td>
+                    <td><input id="departureTime" type="text" th:field="*{departureTime}"  placeholder="yyyy/mm/dd HH:mm" /></td>
                     <td th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}">Date Error</td>
                 </tr>
                 <tr>
                     <td>Arrival Place:</td>
-                    <td><input type="text" th:field="*{arrivalPlace}" /></td>
+                    <td><input id="arrivalPlace" type="text" th:field="*{arrivalPlace}" /></td>
                     <td th:if="${#fields.hasErrors('arrivalPlace')}" th:errors="*{arrivalPlace}">Location Error</td>
                 </tr>
                 <tr>
                     <td>Arrival Time:</td>
-                    <td><input type="text" th:field="*{arrivalTime}" placeholder="yyyy/mm/dd HH:mm" /></td>
+                    <td><input id="arrivalTime" type="text" th:field="*{arrivalTime}" placeholder="yyyy/mm/dd HH:mm" /></td>
                     <td th:if="${#fields.hasErrors('arrivalTime')}" th:errors="*{arrivalTime}">Date Error</td>
                 </tr>
                 <tr>
-                    <td>Free Seats:</td>
-                    <td><input type="text" th:field="*{maxSeats}" /></td>
+                    <td>Max Seats:</td>
+                    <td><input id="maxSeats" type="text" th:field="*{maxSeats}" /></td>
                     <td th:if="${#fields.hasErrors('maxSeats')}" th:errors="*{maxSeats}">Space Error</td>
                 </tr>
                 <tr>
@@ -51,5 +50,8 @@
                 </tr>
             </table>
         </form>
+        <form action="homepage">
+	    	<input type="submit" value="Seen It All" />
+		</form>
     </body>
 </html>

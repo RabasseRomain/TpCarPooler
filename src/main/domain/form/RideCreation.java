@@ -12,8 +12,6 @@ public class RideCreation {
 	@NotNull
 	private String login;
 	@NotNull
-	private String password;
-	@NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date departureTime;
     @NotNull
@@ -41,13 +39,6 @@ public class RideCreation {
 	}
 	public void setLogin(String login) {
 		this.login = login;
-	}
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public Date getDepartureTime() {
 		return departureTime;

@@ -2,13 +2,8 @@ package main.domain.form;
 
 import javax.annotation.ManagedBean;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import main.domain.data.User;
-import main.domain.repository.UserRepository;
-
 @ManagedBean
-public class UserLoginForm {
+public class UserLogin {
 	
 	private String login;
 	private String password;

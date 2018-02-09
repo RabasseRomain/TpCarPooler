@@ -1,9 +1,9 @@
-package main.domain.form;
+package main.domain.controller;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,108 +11,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import main.domain.data.Ride;
 import main.domain.data.User;
+import main.domain.form.RideBooking;
+import main.domain.form.RideCreation;
 import main.domain.repository.RideRepository;
 import main.domain.repository.UserRepository;
 import main.domain.services.RideService;
 import main.domain.services.UserService;
 
-@Controller
-public class WebController extends WebMvcConfigurerAdapter {
+public class RideController extends WebMvcConfigurerAdapter  {
 	
-	// ----- PARAMETERS ---------------------------------------------------------------------------
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private RideService rideService;
-	@Autowired
     UserRepository userRepository;
+	@Autowired
+	private RideService rideService;
 	@Autowired
     RideRepository rideRepository;
 	
-	// ----- FALLBACK URL -------------------------------------------------------------------------
-	@GetMapping
-	public String next() {
-		System.out.println("NEXT");
-		return "homepage";
-	}
-	
-	// ----- Show Index -------------------------
-    @GetMapping("/")
-    public String showIndex() {
-        return "Index";
-    }
-	
-	// ----- Show Index -------------------------
-    @GetMapping("/I")
-    public String showIndexV2() {
-        return "Index";
-    }
-
-    // ----- SIGN UP USER -------------------------------------------------------------------------
-    // ----- Show User Form ---------------------
-    @GetMapping("/U")
-    public String showUserForm(UserCreation userCreation) {
-        return "userForm";
-    }
-    
-    // ----- Check User Sign up -----------------
-    @PostMapping("/SignUp")
-    public String checkUserInfo(@Valid UserCreation userCreation, BindingResult bindingResult) {
-    	
-    	if (bindingResult.hasErrors()) {
-            return "userForm";
-        }
-
-        User user = new User();
-        
-        user.setLogin(userCreation.getLogin());
-        user.setPassword(userCreation.getPassword());
-        user.setEmail(userCreation.getEmail());
-        user.setBirthDate(userCreation.getBirthDate());
-        
-        userService.signup(user);
-        
-        return "redirect:/homepage";
-    }
-    
-    // ----- LOG IN USER --------------------------------------------------------------------------
-    // ----- Show Login Form ---------------------
-    @GetMapping("/L")
-    public String showLoginForm(UserLoginForm logIn) {
-        return "LoginForm";
-    }
-    
-    // ----- Check User Log In -----------------
-    @PostMapping("/Login")
-    public String checkUserLogIn(@Valid UserLoginForm userLoginForm, BindingResult bindingResult) {
-
-    	if (bindingResult.hasErrors()) {
-            return "LoginForm";
-        }
-        
-        User user = userRepository.findOneByLogin(userLoginForm.getLogin());
-        
-        if(user == null) {
-        	return "userForm";
-        }
-        
-        if (user.getPassword().equalsIgnoreCase(userLoginForm.getPassword())) {
-        	System.out.println(user.getLogin());
-        	return "redirect:/homepage";
-        }
-        
-        return "LoginForm";
-    }    
-    
     // ----- OFFER RIDE ---------------------------------------------------------------------------
     // ----- Show Ride Form ---------------------
-    @GetMapping("/R")
+    @GetMapping("/RC")
     public String showRideForm(RideCreation rideCreation) {
         return "rideForm";
     }
     
     // ----- Check Ride Creation ----------------
-    @PostMapping("/RideOffer")
+    @PostMapping("/RideCreate")
     public String checkRideInfo(@Valid RideCreation rideCreation, BindingResult bindingResult) {
     	
     	if (bindingResult.hasErrors()) {
@@ -121,6 +46,10 @@ public class WebController extends WebMvcConfigurerAdapter {
 
         Ride ride = new Ride();
         User user = userRepository.findOneByLogin(rideCreation.getLogin());
+        
+        if(user == null) {
+        	return "rideForm";
+        }
         
         ride.setDeparturePlace(rideCreation.getDeparturePlace());
         ride.setDepartureTime(rideCreation.getDepartureTime());
@@ -133,10 +62,10 @@ public class WebController extends WebMvcConfigurerAdapter {
         
         return "redirect:/homepage";
     }
-    
+        
     // ----- BOOK RIDE ----------------------------------------------------------------------------
     // ----- Show Book Form ---------------------
-    @GetMapping("/B")
+    @GetMapping("/RB")
     public String showBookForm(RideBooking rideBooking) {
         return "bookForm";
     }
@@ -152,6 +81,16 @@ public class WebController extends WebMvcConfigurerAdapter {
         Ride ride = rideRepository.findOne(rideBooking.getRideId());
         User user = userRepository.findOneByLogin(rideBooking.getLogin());
         
+        if(user == null) {
+        	return "bookForm";
+        }
+        if(ride == null) {
+        	return "bookForm";
+        }
+        if(ride.getPassengers().size() == ride.getMaxSeats()) {
+        	return "bookForm";
+        }
+        
         ride.getPassengers().add(user);
         user.getBookedRides().add(ride);
         
@@ -160,4 +99,15 @@ public class WebController extends WebMvcConfigurerAdapter {
         
         return "redirect:/homepage";
     }
+    
+    // ----- VIEW ALL RIDE ---------------------------------------------------------------------------
+    @GetMapping("/RL")
+    public String list(Model model) {
+
+        Iterable<Ride> rides;
+        rides = rideRepository.findAll();
+        model.addAttribute("rides", rides);
+        return "rideList";
+	}
+    
 }

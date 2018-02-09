@@ -13,8 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ride {
@@ -24,10 +23,10 @@ public class Ride {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToOne
     private User driver;
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToMany
 	private List<User> passengers;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
@@ -43,8 +42,17 @@ public class Ride {
     
     private int maxSeats;
  
+    // ----- TO String --------------------------
+    
+    @Override
+	public String toString() {
+		return "Ride [id=" + id + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime
+				+ ", departurePlace=" + departurePlace + ", arrivalPlace=" + arrivalPlace + ", maxSeats=" + maxSeats
+				+ "]";
+	}
+    
 	// ----- Getters and Setters ----------------
-	
+
 	public long getId() {
 		return id;
 	}

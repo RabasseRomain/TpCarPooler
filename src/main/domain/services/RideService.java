@@ -22,9 +22,10 @@ public class RideService {
     	oldRide.setDriver(newRide.getDriver());
     	oldRide.setPassengers(newRide.getPassengers());
     	oldRide.setMaxSeats(newRide.getMaxSeats());
-//    	oldRide.setLocations(newRide.getLocations());
-//    	oldRide.setTimeStamps(newRide.getTimeStamps());
-//    	oldRide.setCaracteristics(newRide.getCaracteristics());
+    	oldRide.setDeparturePlace(newRide.getDeparturePlace());
+    	oldRide.setDepartureTime(newRide.getDepartureTime());
+    	oldRide.setArrivalPlace(newRide.getArrivalPlace());
+    	oldRide.setArrivalTime(newRide.getArrivalTime());
     	rideDao.save(oldRide);
     }
     
