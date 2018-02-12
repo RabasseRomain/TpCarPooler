@@ -8,18 +8,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class WebController extends WebMvcConfigurerAdapter {
 
 	// ----- FALLBACK URL -------------------------------------------------------------------------
-	@GetMapping
+	@GetMapping("H")
 	public String next() {
 		//System.out.println("NEXT");
 		return "homepage";
 	}
 	
-	// ----- Show Index -------------------------
-    @GetMapping("/")
-    public String showIndex() {
-        return "Index";
-    }
-	
+//	// ----- Show Index -------------------------
+//    @GetMapping("/")
+//    public String showIndex() {
+//        return "Index";
+//    }
+//	
 	// ----- Show Index -------------------------
     @GetMapping("/I")
     public String showIndexV2() {

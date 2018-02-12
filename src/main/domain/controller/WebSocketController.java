@@ -7,8 +7,8 @@ import main.domain.data.Ride;
 
 public class WebSocketController {
 	
-	@MessageMapping("/rideListUp")		// Listen Here
-	@SendTo("/topic/ride")				// Answer Here
+	@MessageMapping("/rideCreate")		// Listen Here
+	@SendTo("/topic/rideList")				// Answer Here
 	public Ride send(Ride ride) throws Exception {
 		System.out.println("Hello From Web Controller");
     return ride;

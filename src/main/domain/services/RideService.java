@@ -1,6 +1,7 @@
  package main.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import main.domain.data.Ride;
@@ -12,9 +13,13 @@ public class RideService {
 	
     @Autowired
     RideRepository rideDao;
+    
+    @Autowired
+    private SimpMessagingTemplate template;
 
     public void create(Ride ride) {
         rideDao.save(ride);
+        template.convertAndSend("/topic/rideList", ride);
     }
     
     public void update(Long oldRideId, Ride newRide) {

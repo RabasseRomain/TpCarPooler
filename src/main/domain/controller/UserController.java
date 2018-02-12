@@ -3,10 +3,10 @@ package main.domain.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import main.domain.data.User;
 import main.domain.form.UserCreation;
@@ -14,7 +14,8 @@ import main.domain.form.UserLogin;
 import main.domain.repository.UserRepository;
 import main.domain.services.UserService;
 
-public class UserController extends WebMvcConfigurerAdapter {
+@Controller
+public class UserController {
 	
 	@Autowired
 	private UserService userService;
@@ -45,7 +46,7 @@ public class UserController extends WebMvcConfigurerAdapter {
         
         userService.signup(user);
         
-        return "redirect:/homepage";
+        return "redirect:/H";
     }
     
     // ----- LOG IN USER --------------------------------------------------------------------------
@@ -70,7 +71,7 @@ public class UserController extends WebMvcConfigurerAdapter {
         }
         
         if (user.getPassword().equalsIgnoreCase(userLoginForm.getPassword())) {
-        	return "redirect:/homepage";
+        	return "redirect:/H";
         }
         
         return "LoginForm";

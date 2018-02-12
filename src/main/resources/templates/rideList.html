@@ -5,9 +5,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<title>List of Opportunities</title>
-		<script src="/webjars/jquery/jquery.min.js"></script>
-   		<script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   	 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+		<script src="/webjars/stomp-websocket/stomp.min.js"></script>
     	<script src="/CarPoolerWebSocket.js"></script>
     </head>
     
@@ -16,31 +17,29 @@
 	    	<input type="submit" value="Seen It All" />
 		</form>
 		<section class="section">
-	    <div class="container">
-	        <table id="listTable" class="table ">
-	            <tr>
-	                <th>Driver</th>
-		            <th>From</th>
-		            <th>At</th>
-		            <th>To</th>
-		            <th>At</th>
-		            <th>Passengers</th>
-		            <th>Out Of</th>
-	            </tr>
-	            
-	            	            
-	            <tr th:each="ride : ${rides}">
-	                <td th:text="${ride.driver.login}">Driver</td>
-		            <td th:text="${ride.departurePlace}">Here</td>
-		            <td th:text="${ride.departureTime}">2020/10/10 10:10</td>
-		            <td th:text="${ride.arrivalPlace}">There</td>
-		            <td th:text="${ride.arrivalTime}">2020/10/10 10:10</td>
-		            <td th:text="${ride.passengers.size()}">Passengers</td>
-		            <td th:text="${ride.maxSeats}">999</td>
-	            </tr>
-	            
-	        </table>
-	    </div>
+	        <div class="container">
+        		<div class="columns is-centered">
+				        <table id="listTable" class="table ">
+				            <tr>
+				                <th>Driver</th>
+					            <th>From</th>
+					            <th>At</th>
+					            <th>To</th>
+					            <th>At</th>
+					            <th>Passengers</th>
+					            <th>Out Of</th>
+				            </tr>            
+				            <tr th:each="ride : ${rides}">
+				                <td th:text="${ride.driver.login}">Driver</td>
+					            <td th:text="${ride.departurePlace}">Here</td>
+					            <td th:text="${ride.departureTime}">2020/10/10 10:10</td>
+					            <td th:text="${ride.arrivalPlace}">There</td>
+					            <td th:text="${ride.arrivalTime}">2020/10/10 10:10</td>
+					            <td th:text="${ride.passengers.size()}">Passengers</td>
+					            <td th:text="${ride.maxSeats}">999</td>
+				            </tr>
+				        </table>
+	    </div></div>
 		</section>
     </body>
 </html>
