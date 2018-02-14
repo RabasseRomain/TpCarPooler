@@ -1,3 +1,4 @@
 language: java
 jdk:
   - oraclejdk8
+install: mvn sonar:sonar -Dsonar.organization=rabasseromain-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=a122cc75a2e3634757b794d18e072a58df475c6c
