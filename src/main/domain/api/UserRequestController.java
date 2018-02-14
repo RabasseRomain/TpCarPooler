@@ -67,7 +67,7 @@ public class UserRequestController {
         System.out.println("Delete | user N°: " + userId);
         userService.delete(userId);
     }
-    
+
     // ----- OFFER A RIDE -----------------------
 	@PutMapping("offer/{rideId}/{userId}")
     public void offerRide(@PathVariable("rideId") Long rideId, @PathVariable("userId") Long userId) {
